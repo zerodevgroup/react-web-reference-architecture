@@ -16,7 +16,7 @@ class App extends Component {
     return (
       <Router>
         <div>
-          <NavBar />
+          <NavBar title="React Reference" />
         </div>
         <div>
           <Switch>
