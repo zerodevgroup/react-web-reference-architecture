@@ -45,7 +45,7 @@ export default function SideMenu() {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <MenuList>
-        <MenuItem component={Link} to="/">Home</MenuItem>
+        <MenuItem component={Link} to="/">Workflow</MenuItem>
         <MenuItem component={Link} to="/users">Users</MenuItem>
         <MenuItem component={Link} to="/about">About</MenuItem>
       </MenuList>

@@ -1,30 +1,37 @@
 const initialState = {
-  todoList: []
+  workflow: {
+    workflowItems: {},
+    columns: {
+      "column-1": {
+        id: "column-1",
+        title: "To do",
+        workflowItemIds: [],
+      },
+      "column-2": {
+        id: "column-2",
+        title: "In Progress",
+        workflowItemIds: [],
+      },
+      "column-3": {
+        id: "column-3",
+        title: "Done",
+        workflowItemIds: [],
+      },
+    },
+    columnOrder: ["column-1", "column-2", "column-3"],
+  },
 }
 
 const types = {
-  SET_TODO_LIST: "SET_TODO_LIST",
-  ADD_TO_TODO_LIST: "ADD_TO_TODO_LIST",
-  REMOVE_FROM_TODO_LIST: "REMOVE_FROM_TODO_LIST"
+  WORKFLOW_UPDATE: "WORKFLOW_UPDATE",
 }
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case types.SET_TODO_LIST:
+    case types.WORKFLOW_UPDATE:
       return {
         ...state,
-        todoList: action.payload
-      }
-    case types.ADD_TO_TODO_LIST:
-      return {
-        ...state,
-        todoList: [...state.todoList, action.payload]
-      }
-    case types.REMOVE_FROM_TODO_LIST:
-      return {
-        ...state,
-        todoList: state.todoList.filter(
-          todo => todo !== action.payload)
+        workFlow: action.payload
       }
     default:
       throw new Error("Unexpected action")

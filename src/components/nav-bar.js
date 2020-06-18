@@ -17,6 +17,7 @@ const useStyles = makeStyles((theme) => ({
     marginRight: theme.spacing(2),
   },
   title: {
+    color: "white",
     flexGrow: 1,
   },
 }))
@@ -32,7 +33,7 @@ export default function NavBar(props) {
             <Typography variant="h6" className={classes.title}>
               {props.title}
             </Typography>
-          <Button component={Link} to="/" color="inherit">Home</Button>
+          <Button component={Link} to="/" color="inherit">Workflow</Button>
         </Toolbar>
       </AppBar>
     </div>

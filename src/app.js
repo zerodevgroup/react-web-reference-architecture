@@ -8,10 +8,13 @@ import {
 
 import "./app.css"
 
+// Components
 import NavBar from "./components/nav-bar"
-import Home from "./components/home"
-import Users from "./components/users"
-import About from "./components/about"
+
+// Pages
+import Workflow from "./pages/workflow"
+import Users from "./pages/users"
+import About from "./pages/about"
 
 
 export default function App() {
@@ -29,7 +32,7 @@ export default function App() {
             <Users />
           </Route>
           <Route path="/">
-            <Home />
+            <Workflow />
           </Route>
         </Switch>
       </div>
