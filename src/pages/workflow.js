@@ -1,85 +1,125 @@
-import React, { useContext } from "react";
-import Column from "../components/dnd/column"
-import { DragDropContext } from "react-beautiful-dnd"
-import "@atlaskit/css-reset"
-import styled from "styled-components"
-import CardModal from "../components/workflow/card-modal"
+import React, { useContext } from 'react';
+import Column from '../components/dnd/column';
+import { DragDropContext } from 'react-beautiful-dnd';
+import '@atlaskit/css-reset';
+import styled from 'styled-components';
+
+import {
+  ExpansionPanel,
+  ExpansionPanelDetails,
+  ExpansionPanelSummary,
+  ExpansionPanelActions,
+  Typography,
+  Divider,
+  TextField,
+  ButtonGroup,
+  Button,
+  Card,
+  InputLabel,
+  FormControl,
+  FormControlLabel,
+  Select,
+  MenuItem,
+  List,
+  ListItem,
+  ListItemText,
+  CircularProgress,
+  Checkbox
+} from '@material-ui/core';
+import CardModal from "../components/workflow/CardModal"
 import { StoreContext } from "../context/store-context"
 
 const Container = styled.div`
   display: flex;
-`
+`;
 
 export default function WorkFlow() {
   const { state, dispatch, actions } = useContext(StoreContext)
 
   const onDragStart = (start) => {
-  }
+    /*
+    const homeIndex = state.columnOrder.indexOf(start.source.droppableId);
 
-  const onDragUpdate = (update) => {
+    this.setState({
+      homeIndex,
+    });
+    */
+  };
+
+  const onDragUpdate = (start) => {
+  // onDragUpdate = update => {
+  //   // Changes background color when task is moved
+  //   const { destination } = update;
+  //   const opacity = destination
+  //   ? destination.index / Object.keys(this.state.tasks).length
+  //   : 0;
+  //   document.body.style.backgroundColor = `rgba(153, 141, 217, ${opacity})`;
   }
 
   const onDragEnd = (result) => {
     let workflow = state.workflow
+    // this.setState ({
+    //   homeIndex: null,
+    // });
 
-    document.body.style.color = "inherit"
-    document.body.style.backgroundColor = "inherit"
+    document.body.style.color = 'inherit';
+    document.body.style.backgroundColor = 'inherit';
 
-    const { destination, source, draggableId } = result
+    const { destination, source, draggableId } = result;
 
-    if(!destination) {
-      return
+    if (!destination) {
+      return;
     }
-    
-    if(destination.droppableId === source.droppableId && destination.index === source.index) {
-      return
+    if (
+      destination.droppableId === source.droppableId &&
+      destination.index === source.index
+    ) {
+      return;
     }
 
     // WORKFLOW_GET_COLUMN
-    const start = state.workflow.columns[source.droppabled]
-    const finish = state.workflow.columns[destination.droppableId]
+    const start = state.workflow.columns[source.droppableId];
+    const finish = state.workflow.columns[destination.droppableId];
 
-    // Moving WorkflowItems in the same Column
-    if(start === finish) {
-      const newWorkflowItemIds = Array.from(start.workflowItemIds)
-      newWorkflowItemIds.splice(source.index, 1)
-      newWorkflowItemIds.splice(destination.index, 0, draggableId)
+    //  Moving Tasks in the same Column
+    if (start === finish) {
+      const newTaskIds = Array.from(start.taskIds);
+      newTaskIds.splice(source.index, 1);
+      newTaskIds.splice(destination.index, 0, draggableId);
 
       let newColumn = {
         ...start,
-        workflowItemIds: newWorkflowItemIds,
-      }
+        taskIds: newTaskIds,
+      };
 
       // WORKFLOW_UPDATE_COLUMN
       const newState = {
         ...state.workflow,
         columns: {
           ...state.workflow.columns,
-          [newColumn.id]: newColumn
-        }
-      }
+          [newColumn.id]: newColumn,
+        },
+      };
       actions.workflowUpdate(newState)
-    }
-    // Moving WorkflowItems fron one Column to another
-    else {
-      const startWorkflowItemIds = Array.from(start.workflowItemIds)
-      startWorkflowItemIds.splice(source.index, 1)
+      // return;
+    } else {
 
+      // Moving Tasks fron one Column to another
+      const startTaskIds = Array.from(start.taskIds);
+      startTaskIds.splice(source.index, 1);
       const newStart = {
         ...start,
-        workflowItemIds: startWorkflowItemIds,
-      }
+        taskIds: startTaskIds,
+      };
 
-      const finishWorkflowItemIds = Array.from(finish.workflowItemIds)
-      finishWorkflowItemIds.splice(destination.index, 0, draggableId)
-
+      const finishTaskIds = Array.from(finish.taskIds);
+      finishTaskIds.splice(destination.index, 0, draggableId);
       const newFinish = {
         ...finish,
-        workflowItemIds: finishWorkflowItemIds,
-      }
-
-      console.log(startWorkflowItemIds, "START_WORKFLOW_ITEM_IDs")
-      console.log(finishWorkflowItemIds, "FINISH_WORKFLOW_ITEM_IDs")
+        taskIds: finishTaskIds,
+      };
+      console.log(finishTaskIds, "FINISH TASK IDs")
+      console.log(startTaskIds, "START TASK IDs")
 
       // WORKFLOW_UPDATE_COLUMN
       const newState = {
@@ -88,35 +128,39 @@ export default function WorkFlow() {
           ...state.workflow.columns,
           [newStart.id]: newStart,
           [newFinish.id]: newFinish,
-        }
-      }
-
+        },
+      };
       actions.workflowUpdate(newState)
     }
-  }
+  };
 
-  return(
-    <DragDropContext onDragEnd={onDragEnd} onDragStart={onDragStart} onDragUpdate={onDragUpdate}>
-      <CardModal />
+  return (
+    <DragDropContext
+      onDragEnd={onDragEnd}
+      onDragStart={onDragStart}
+      onDragUpdate={onDragUpdate}
+    >
+      <CardModal/>
       <Container>
         {state.workflow.columnOrder.map((columnId, index) => {
-          const column = state.workflow.columns[columnId]
-          const workflowItems = column.workflowItemIds.map(
-            workflowItemId => state.workflow.workflowItems[workflowItemId]
-          )
+          const column = state.workflow.columns[columnId];
+          const tasks = column.taskIds.map(
+            taskId => state.workflow.tasks[taskId]
+          );
 
-          const isDropDisabled = index < state.workflow.homeIndex
+          const isDropDisabled = index < state.workflow.homeIndex;
 
-          return <Column 
+          return <Column
             key={column.id}
             column={column}
-            workflowItems={workflowItems}
+            tasks={tasks}
             isDropDisabled={isDropDisabled}
-          />
+          />;
         })}
       </Container>
     </DragDropContext>
-  )
+  );
+
 }
 
-
+// ReactDOM.render(<DragTodo />, document.getElementById('root'));
