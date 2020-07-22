@@ -61,11 +61,11 @@ const PageList = () => {
                 fullWidth
                 onKeyPress={createPage}
             />
-            <div>
+            <List>
             {Object.keys(state.wiki.pages).map((key) => 
-                <div key={key}>{state.wiki.pages[key].title}</div>
+                <ListItem button key={key}><ListItemText primary={state.wiki.pages[key].title}/></ListItem>
             )}
-            </div>
+            </List>
         </React.Fragment>
 
     )
