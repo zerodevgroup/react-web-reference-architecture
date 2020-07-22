@@ -26,7 +26,9 @@ const initialState = {
     columnOrder: ['column-1', 'column-2', 'column-3'],
   },
   wiki: {
-    pages:  {}
+    pages:  {},
+    currentPage: null
+
   },
   campaign: {
       /* etc */
