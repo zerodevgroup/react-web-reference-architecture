@@ -52,13 +52,6 @@ const PageList = () => {
     return (
         <React.Fragment>
             <div>PageList</div>
-            <List>
-            {Object.keys(state.wiki.pages).map((key) => 
-                <ListItem button>
-                    <ListItemText primary={state.wiki.pages[key]}/>
-                </ListItem>
-            )}
-            </List>
             <TextField
                 onChange={handleChange}
                 value={newPageTitle}
@@ -68,6 +61,11 @@ const PageList = () => {
                 fullWidth
                 onKeyPress={createPage}
             />
+            <div>
+            {Object.keys(state.wiki.pages).map((key) => 
+                <div key={key}>{state.wiki.pages[key].title}</div>
+            )}
+            </div>
         </React.Fragment>
 
     )
