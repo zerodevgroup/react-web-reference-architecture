@@ -13,10 +13,15 @@ export const useActions = (state, dispatch) => {
     dispatch({ type: types.CAMPAIGN_UPDATE, payload: newCampaign})
   } 
 
+  function wikiUpdate(newWiki) {
+    dispatch({type: types.WIKI_UPDATE, payload: newWiki})
+  }
+
   return {
     workflowUpdate,
     campaignUpdate,
-    setCampaignInitialState
+    setCampaignInitialState,
+    wikiUpdate,
   }
 }
 

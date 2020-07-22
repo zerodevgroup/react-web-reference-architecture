@@ -46,8 +46,9 @@ export default function SideMenu() {
     >
       <MenuList>
         <MenuItem component={Link} to="/">Workflow</MenuItem>
-        <MenuItem component={Link} to="/users">Users</MenuItem>
+        <MenuItem component={Link} to="/login">Login</MenuItem>
         <MenuItem component={Link} to="/about">About</MenuItem>
+        <MenuItem component={Link} to="/wiki">Wiki</MenuItem>
       </MenuList>
     </div>
   )

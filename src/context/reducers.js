@@ -25,6 +25,9 @@ const initialState = {
     },
     columnOrder: ['column-1', 'column-2', 'column-3'],
   },
+  wiki: {
+    pages:  {}
+  },
   campaign: {
       /* etc */
               timeStamp: null,
@@ -224,6 +227,11 @@ const reducer = (state = initialState, action) => {
         return {
           ...state,
           campaign: action.payload
+        }
+    case types.WIKI_UPDATE:
+        return {
+          ...state,
+          wiki: action.payload
         }
     default:
       throw new Error("Unexpected action")

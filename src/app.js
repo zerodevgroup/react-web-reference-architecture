@@ -13,9 +13,9 @@ import NavBar from "./components/nav-bar"
 
 // Pages
 import Workflow from "./pages/workflow"
-import Users from "./pages/users"
+import Login from "./pages/login"
 import About from "./pages/about"
-
+import Wiki from "./pages/wiki"
 
 export default function App() {
   return (
@@ -28,8 +28,11 @@ export default function App() {
           <Route path="/about">
             <About />
           </Route>
-          <Route path="/users">
-            <Users />
+          <Route path="/login">
+            <Login />
+          </Route>
+          <Route path="/wiki">
+            <Wiki />
           </Route>
           <Route path="/">
             <Workflow />
