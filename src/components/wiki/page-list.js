@@ -32,7 +32,12 @@ const PageList = () => {
           let wiki = {...state.wiki}
           let title = event.target.value
           let titleKey = _.camelCase(title)
-          wiki.pages[titleKey] = {title: title}
+
+          wiki.pages[titleKey] = {
+              title: title,
+              sections: [],
+          }
+
           actions.wikiUpdate(wiki)
           //   handleEnter()
         }
@@ -41,6 +46,16 @@ const PageList = () => {
     const handleChange = (event) => {
         let value = event.target.value
         setNewPageTitle(value)
+    }
+
+    const handleClick = (key) => {
+        console.log({
+          key: key
+        })
+        
+        let wiki = { ...state.wiki }
+        wiki.currentPage = key
+        actions.wikiUpdate(wiki)
     }
 
     const {state, dispatch, actions } = useContext(StoreContext)
@@ -63,7 +78,7 @@ const PageList = () => {
             />
             <List>
             {Object.keys(state.wiki.pages).map((key) => 
-                <ListItem button key={key}><ListItemText primary={state.wiki.pages[key].title}/></ListItem>
+                <ListItem button key={key} onClick={() => handleClick(key)}><ListItemText primary={state.wiki.pages[key].title}/></ListItem>
             )}
             </List>
         </React.Fragment>

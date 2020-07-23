@@ -27,8 +27,7 @@ const initialState = {
   },
   wiki: {
     pages:  {},
-    currentPage: null
-
+    currentPage: "",
   },
   campaign: {
       /* etc */
@@ -210,6 +209,7 @@ const initialState = {
 
 const types = {
   WORKFLOW_UPDATE: "WORKFLOW_UPDATE",
+  WIKI_UPDATE: "WIKI_UPDATE",
   CAMPAIGN_SET_INITIAL_STATE: "CAMPAIGN_SET_INITIAL_STATE"
 }
 

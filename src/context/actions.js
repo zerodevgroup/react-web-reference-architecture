@@ -4,10 +4,12 @@ export const useActions = (state, dispatch) => {
     // Simple dispatch to reducer (for now)
     dispatch({ type: types.WORKFLOW_UPDATE, payload: newWorkflow })
   }
+
   function setCampaignInitialState() {
 
     dispatch({ type: types.CAMPAIGN_SET_INITIAL_STATE })
   } 
+
   function campaignUpdate(newCampaign) {
 
     dispatch({ type: types.CAMPAIGN_UPDATE, payload: newCampaign})
