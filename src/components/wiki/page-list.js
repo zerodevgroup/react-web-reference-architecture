@@ -66,21 +66,25 @@ const PageList = () => {
     console.log("PageList")
     return (
         <React.Fragment>
-            <div>PageList</div>
-            <TextField
-                onChange={handleChange}
-                value={newPageTitle}
-                autoFocus
-                id="newPageTitle"
-                label="Page Title"
-                fullWidth
-                onKeyPress={createPage}
-            />
-            <List>
-            {Object.keys(state.wiki.pages).map((key) => 
-                <ListItem button key={key} onClick={() => handleClick(key)}><ListItemText primary={state.wiki.pages[key].title}/></ListItem>
-            )}
-            </List>
+            <Card>
+                <Typography align="center" variant="h6" gutterBottom>Page List</Typography>
+                <Divider />
+                <TextField
+                    onChange={handleChange}
+                    value={newPageTitle}
+                    autoFocus
+                    id="newPageTitle"
+                    label="Page Title"
+                    fullWidth
+                    onKeyPress={createPage}
+                />
+                <List>
+                <Divider />
+                {Object.keys(state.wiki.pages).map((key) => 
+                    <ListItem button key={key} onClick={() => handleClick(key)}><ListItemText primary={state.wiki.pages[key].title}/></ListItem>
+                )}
+                </List>
+            </Card>
         </React.Fragment>
 
     )

@@ -32,7 +32,7 @@ const Page = () => {
     console.log("Page")
     return (
         <React.Fragment>
-            {state.wiki.currentPage ? <Typography>{state.wiki.pages[state.wiki.currentPage].title}</Typography> :<Typography>No Page Selected</Typography>}
+            {state.wiki.currentPage ? <Typography variant="h1" component="h2">{state.wiki.pages[state.wiki.currentPage].title}</Typography> :<Typography variant="h3" component="h4">No Page Selected</Typography>}
         </React.Fragment>
 
     )
