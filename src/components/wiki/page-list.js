@@ -35,7 +35,7 @@ const PageList = () => {
 
           wiki.pages[titleKey] = {
               title: title,
-              sections: [],
+              content: "",
           }
 
           actions.wikiUpdate(wiki)
