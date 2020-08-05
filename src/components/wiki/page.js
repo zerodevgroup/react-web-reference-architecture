@@ -78,7 +78,6 @@ const Page = () => {
     let wikiData = { ...state.wiki }
 
     wikiData.pages[state.wiki.currentPage].content = event.target.value
-    wikiData.pages[state.wiki.currentPage].html = markdown.toHTML(event.target.value)
 
     actions.wikiUpdate(wikiData)
   }
@@ -117,7 +116,7 @@ const Page = () => {
             />
           </Dialog>
         </Toolbar>
-        <span dangerouslySetInnerHTML={ { __html: state.wiki.pages[state.wiki.currentPage].html } } />
+        <span dangerouslySetInnerHTML={ { __html: markdown.toHTML(state.wiki.pages[state.wiki.currentPage].content) } } />
       </React.Fragment>
     )
   }

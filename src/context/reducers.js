@@ -26,7 +26,16 @@ const initialState = {
     columnOrder: ['column-1', 'column-2', 'column-3'],
   },
   wiki: {
-    pages:  {},
+    pages:  {
+        "enrollment": {
+            "title": "Enrollment",
+            "content": `\
+# Enrollment
+  * One
+  * Two
+`
+        }
+    },
     currentPage: "",
   },
   campaign: {
